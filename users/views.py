@@ -1,12 +1,12 @@
 from django.shortcuts import render,redirect
-from .forms import UserRegisterForm,UserUpdateForm,ProfileUpdateForm
+from .forms import UserRegisterForm,UserUpdateForm,ProfileUpdateForm,ScanningForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
 def register(request):#registration page
     if request.method=='POST':
         form=UserRegisterForm(request.POST)
-        if form.is_valid:
+        if form.is_valid():
             form.save()
             username=form.cleaned_data.get('username')
             messages.success(request,f'Account has been created for {username}')
@@ -44,6 +44,22 @@ def profile(request):#profile page
     }
 
     return render(request, 'users/profile.html', context)
+
+def scan(request):
+    if request.method=='POST':
+        s_form=ScanningForm(request.POST,request.FILES,instance=request.user.profile)
+        if s_form.is_valid:
+            s_form.save()
+            messages.success(request,f'Your Scanning is complete')
+            return redirect('Scanpage')
+    else:
+        s_form=ScanningForm()
+
+    context={
+        's_form':s_form
+    }
+    return render(request,'users/Scanning.html',context)
+
 
 
 

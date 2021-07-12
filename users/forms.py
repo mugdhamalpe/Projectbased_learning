@@ -23,3 +23,10 @@ class ProfileUpdateForm(forms.ModelForm):
         model = profile
         fields = ['image']
 
+class ScanningForm(forms.ModelForm):
+    class Meta:
+        model = profile
+        fields = ['scan_image']
+
+
+

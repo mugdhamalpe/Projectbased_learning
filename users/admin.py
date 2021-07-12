@@ -3,3 +3,4 @@ from .models import profile
 
 admin.site.register(profile)
 
+
