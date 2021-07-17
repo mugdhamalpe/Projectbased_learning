@@ -62,9 +62,9 @@
     </nav>
     <div class="container">
         {% if messages %}
-        {% for message in messages %}
-        <div>{{message}}</div>
-        {% endfor %}
+            {% for message in messages %}
+                <div>{{message}}</div>
+            {% endfor %}
         {% endif %}
         {% block content %}{% endblock content %}
     </div>
